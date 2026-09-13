@@ -14,7 +14,6 @@ router.delete('/delete/:id', authenticateToken, deletePost);
 router.post('/addLike',authenticateToken, addLiketoPost)
 router.get('/getPostComments/:postId',authenticateToken, getPostComments)
 router.post('/addPostComment',authenticateToken,addPostComment)
-router.get('/getPostsofUser/:userId',authenticateToken,getPostsofUser)
 
 export default router;
 async function getPosts(req, res){
@@ -24,20 +23,6 @@ async function getPosts(req, res){
             return res.status(response[0]).json(response[1]);
         }
     );
-}
-async function getPostsofUser(req, res) {
-    const userId = req.params.userId;
-    if (!userId || userId === "undefined" || !mongoose.Types.ObjectId.isValid(userId)) {
-        return res.status(400).json({success: false, message: "userId mancante o non valido"});
-    }
-    Post.getPostsofUser(userId)
-        .then((response) => {
-            return res.status(response[0]).json(response[1]);
-        })
-        .catch((err) => {
-            console.error(err);
-            return res.status(500).json({success: false, message: "Errore interno"});
-        });
 }
 async function getPostComments(req, res){
     const postId = req.params.postId;

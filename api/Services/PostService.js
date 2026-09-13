@@ -9,7 +9,6 @@ export default {
     getPostComments,
     addPostComment,
     addLiketoPost,
-    getPostsofUser,
 }
 async function addPost(author,ImgUrl,content) {
     const CreatedPost = await new Post({author:author,image:ImgUrl,content:content}).save();
@@ -27,16 +26,6 @@ async function getPosts() {
             const commentsCount = await Comment.countDocuments({post : post._id});
             return {...post.toObject(),commentsCount} //per chi non capisce: ... serve a prendere tutti gli elementi di post, e nel nostro caso torniamo un array che ha quegli element + commentsCount. 
             //facciamo toobject perche' arrivando da mongo, non possiamo interpretarli normalmente in node, ce lo rende plain text cosi'
-        })
-    )
-    return [200, response.responseWithData(postswithcomments)];
-}
-async function getPostsofUser(userId) {
-    const posts = await Post.find({author: userId}).populate("author", "username profilePicture").sort({createdAt: -1});
-    const postswithcomments = await Promise.all(
-        posts.map(async (post)=> {
-            const commentsCount = await Comment.countDocuments({post : post._id});
-            return {...post.toObject(),commentsCount}
         })
     )
     return [200, response.responseWithData(postswithcomments)];
