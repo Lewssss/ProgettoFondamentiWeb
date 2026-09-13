@@ -1,9 +1,7 @@
-import express from 'express';
 import { Router } from 'express';
 import Post from '../Services/PostService.js'
 import { authenticateToken } from '../Middleware/authMiddleware.js';
 import multer from 'multer';
-import path from 'path';
 import mongoose from 'mongoose';
 const router = Router();
 const filestorage = multer.diskStorage({destination:"uploads/", filename: (req,file,cb)=> {cb(null,req.body.author +"_"+ file.originalname)}}) //salva file in disco (multer di defualt scrive in ram)

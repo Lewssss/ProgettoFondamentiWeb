@@ -86,8 +86,8 @@ async function getChats(userId) {
 
     return [200, response.responseWithData(chatsWithUnreadCount)];
   } catch (error) {
-    console.log(error);
-    return [401, response.Fail()];
+    console.error(error);
+    return [500, response.Fail()];
   }
 }
 

@@ -1,6 +1,5 @@
 import express, { response } from "express";
 const router = express.Router();
-import Post from "../Services/PostService.js";
 import User from "../models/Users.js";
 import UserService from "../Services/UserServices.js";
 import multer from 'multer';
@@ -24,7 +23,6 @@ router.patch("/follow/:id", authenticateToken, updateFollow);
 export default router;
 
 async function getUserData(req,res){
-    console.log(req.params.id)
     const user = await User.findById(req.params.id)
     if (!user) return res.status(404).json({ message: "Utente non trovato" });
     return res.json(user); //inutile passare dal service e dalla response prestabilita, e' solo una get al volo

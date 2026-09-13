@@ -19,7 +19,9 @@ function Register() {
             setTimeout(() => {
                 navigate("/login");
             }, 2000);
-        } catch (error) {}
+        } catch (error) {
+            console.error(err);
+        }
     };
 
   return (
