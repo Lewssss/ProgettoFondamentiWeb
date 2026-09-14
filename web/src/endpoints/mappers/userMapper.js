@@ -1,3 +1,5 @@
+import { fileUrl } from "../../api/config";
+
 export function mapUser(raw) {
   if (!raw) {
     throw new Error("User payload mancante");
@@ -7,7 +9,7 @@ export function mapUser(raw) {
     id: String(raw._id),
     username: raw.username,
     email: raw.email,
-    profilePicture: raw.profilePicture ?? "null",
+    profilePicture: fileUrl(raw.profilePicture ?? "null"),
     followers: raw.followers ?? [],
     following: raw.following ?? [],
     bio: raw.bio ?? "",
@@ -32,11 +34,11 @@ export function mapPost(raw) {
     ? {
         id: String(post.author._id),
         username: post.author.username,
-        profilePicture: post.author.profilePicture ?? null,
+        profilePicture: fileUrl(post.author.profilePicture ?? null),
       }
     : null,
     content: post.content,
-    ImgPost: post.image,
+    ImgPost: fileUrl(post.image),
     likes: post.likes ?? [],
     commentsCount: post.commentsCount ?? 0,
     date: post.createdAt,

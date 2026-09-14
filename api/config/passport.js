@@ -2,6 +2,7 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../models/Users.js";
 import UserService from "../Services/UserServices.js";
+import { API_URL } from "./urls.js";
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -22,7 +23,7 @@ export function setupPassport() {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/user/auth/google/callback",
+        callbackURL: `${API_URL}/user/auth/google/callback`,
       },
       async (accessToken, refreshToken, profile, done) => {
         try {

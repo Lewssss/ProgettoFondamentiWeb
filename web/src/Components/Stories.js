@@ -4,6 +4,7 @@ import { getStories } from "endpoints/rest/userInteractions";
 import StoriesView from "./StoriesView";
 import Modal from "./Modal";
 import { userContext } from "Context/UserContext";
+import { fileUrl } from "../api/config";
 import "./Stories.css";
 
 function Stories() {
@@ -25,7 +26,7 @@ function Stories() {
           className="stories-circle"
           onClick={() => setSelectedStories(storiesOfUser)}
         >
-          <img className="" src={storiesOfUser.author.profilePicture} />
+          <img className="" src={fileUrl(storiesOfUser.author.profilePicture)} alt="" />
         </div>
       ))}
       <Modal

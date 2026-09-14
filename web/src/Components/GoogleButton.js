@@ -1,5 +1,7 @@
+import { API_URL } from "../api/config";
+
 function startGoogleLogin() {
-  window.location.href = "http://localhost:5000/user/auth/google";
+  window.location.href = `${API_URL}/user/auth/google`;
 }
 
 function GoogleButton() {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_BASE } from "./config";
 import { handleApiMessage, showErrorMessage } from "./messageHandler";
 import {
   clearAuthStorage,
@@ -8,7 +9,7 @@ import {
 } from "./tokenStorage";
 
 const api = axios.create({
-  baseURL: "/api", //serve a buttare le richieste verso il backend
+  baseURL: API_BASE,
 });
 
 let isRefreshing = false;
@@ -71,7 +72,7 @@ api.interceptors.response.use(
         isRefreshing = true;
 
         try {
-          const { data } = await axios.post("/api/user/refresh-token", {
+          const { data } = await axios.post(`${API_BASE}/user/refresh-token`, {
             refreshToken,
           });
 

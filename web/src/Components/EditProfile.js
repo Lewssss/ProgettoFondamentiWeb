@@ -1,6 +1,7 @@
 import react from 'react'
 import { useState, useRef, useContext } from 'react'
 import { userContext } from '../Context/UserContext'
+import { fileUrl } from '../api/config'
 import { updateUserImage } from '../endpoints/rest/userInteractions'
 import { updateUserBio } from '../endpoints/rest/userInteractions'
 import './EditProfile.css'
@@ -21,7 +22,7 @@ function EditProfile({ onClose, onUpdated, userdata }) {
     let updatedUser = { ...user };
     if (file) {
       const imgRes = await updateUserImage(user.id, file);
-      updatedUser.profilePicture = imgRes.data.profilePicture;
+      updatedUser.profilePicture = fileUrl(imgRes.data.profilePicture);
     }
     if (bio !== userdata.bio) {
         const bioRes = await updateUserBio(bio);

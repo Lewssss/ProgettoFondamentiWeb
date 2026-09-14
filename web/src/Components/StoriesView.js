@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { fileUrl } from "../api/config";
+import { X, ChevronLeft, ChevronRight, LucideTrash2 } from "lucide-react";
 import "./StoriesView.css";
 import { deleteStory } from "endpoints/rest/userInteractions";
-import { LucideTrash2 } from "lucide-react";
 import Modal from "./Modal";
 
 function StoriesView({ group, onClose, refreshStories }) {
@@ -55,7 +55,7 @@ function StoriesView({ group, onClose, refreshStories }) {
           {currentStory.mediaType === "video" ? (
             <video
               className="media"
-              src={`/${currentStory.mediaUrl.replace(/\\/g, "/")}`}
+              src={fileUrl(currentStory.mediaUrl)}
               autoPlay
               onEnded={next}
               controls={false}
@@ -63,7 +63,7 @@ function StoriesView({ group, onClose, refreshStories }) {
           ) : (
             <img
               className="media"
-              src={`/${currentStory.mediaUrl.replace(/\\/g, "/")}`}
+              src={fileUrl(currentStory.mediaUrl)}
             />
           )}
         </div>

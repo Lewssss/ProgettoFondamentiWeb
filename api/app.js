@@ -11,12 +11,13 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.js";
 import session from "express-session";
 import passport, { setupPassport } from "./config/passport.js";
+import { FRONTEND_URL } from "./config/urls.js";
 import cors from "cors";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 connectDB();
 setupPassport();
@@ -48,7 +49,7 @@ const io = new Server(httpServer, {
   // Crea un'istanza del server Socket.IO utilizzando il server HTTP creato
   cors: {
     //Cors vuol dire Cross-Origin Resource Sharing, che permette di specificare quali domini possono accedere alle risorse del server (opzioni che ho)
-    origin: "http://localhost:3000", // Consente le richieste CORS solo dal dominio specificato
+    origin: FRONTEND_URL,
     methods: ["GET", "POST"], // Consente solo i metodi GET e POST per le richieste CORS
   },
 });
