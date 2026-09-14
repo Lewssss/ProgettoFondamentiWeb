@@ -11,9 +11,15 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!email.trim() || !password.trim()) {
+            setError("Compila tutti i campi");
+            return;
+        }
+        setError("");
         try {
             const loginResponse = await accountLogin(email, password);
             setUser(loginResponse.user);
@@ -31,6 +37,7 @@ function Login() {
         <form className="register-form" onSubmit={handleSubmit}>
             <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            {error ? <p className="auth-error">{error}</p> : null}
             <button type="submit">Accedi</button>
             <div className="auth-or">oppure</div>
             <GoogleButton />

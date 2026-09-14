@@ -11,9 +11,15 @@ function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!username.trim() || !email.trim() || !password.trim()) {
+            setError("Compila tutti i campi");
+            return;
+        }
+        setError("");
         try {
             await accountRegister(username, email, password);
             setTimeout(() => {
@@ -31,6 +37,7 @@ function Register() {
             <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            {error ? <p className="auth-error">{error}</p> : null}
             <button type="submit">Registrati</button>
             <div className="auth-or">oppure</div>
             <GoogleButton />
