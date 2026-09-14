@@ -47,6 +47,10 @@ app.use("/post", PostController);
 app.use("/stories", StoriesController);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.get("/", (req, res) => {
+  res.send("ok");
+});
+
 const httpServer = createServer(app); // Crea un server HTTP utilizzando la funzione createServer
 
 const io = new Server(httpServer, {
@@ -59,6 +63,6 @@ const io = new Server(httpServer, {
 
 initChatSocket(io);
 
-httpServer.listen(port, () => {
+httpServer.listen(port, "0.0.0.0", () => {
   console.log(`Server is running on port ${port}`);
 });
