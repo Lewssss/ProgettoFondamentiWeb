@@ -11,7 +11,6 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.js";
 import session from "express-session";
 import passport, { setupPassport } from "./config/passport.js";
-import { FRONTEND_URL } from "./config/urls.js";
 import cors from "cors";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
@@ -25,7 +24,12 @@ setupPassport();
 app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  }),
+);
 app.use(
   session({
     secret: process.env.JWT_ACCESS_KEY,
@@ -48,9 +52,8 @@ const httpServer = createServer(app); // Crea un server HTTP utilizzando la funz
 const io = new Server(httpServer, {
   // Crea un'istanza del server Socket.IO utilizzando il server HTTP creato
   cors: {
-    //Cors vuol dire Cross-Origin Resource Sharing, che permette di specificare quali domini possono accedere alle risorse del server (opzioni che ho)
-    origin: FRONTEND_URL,
-    methods: ["GET", "POST"], // Consente solo i metodi GET e POST per le richieste CORS
+    origin: true,
+    methods: ["GET", "POST"],
   },
 });
 
