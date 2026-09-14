@@ -40,7 +40,7 @@ function Forward({ post, onClose }) {
               className="forward-user"
               onClick={() => forwardTo(f)}
             >
-              <img src={f.profilePicture} alt="" />
+              <img src={f.profilePicture} alt="" referrerPolicy="no-referrer" />
               <span>{f.username}</span>
             </div>
           ))}

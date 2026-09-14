@@ -45,7 +45,7 @@ function Search({onClose}){
             {users.length == 0 ? <p className="search-empty">Nessuna persona</p> :
               users.map((u) => (
                 <div key={u.id} className="search-user" onClick={() => goProfile(u.id)}>
-                  <img src={u.profilePicture} alt=""/>
+                  <img src={u.profilePicture} alt="" referrerPolicy="no-referrer"/>
                   <span>{u.username}</span>
                 </div>
               ))

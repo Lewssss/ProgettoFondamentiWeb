@@ -26,7 +26,7 @@ function Stories() {
           className="stories-circle"
           onClick={() => setSelectedStories(storiesOfUser)}
         >
-          <img className="" src={fileUrl(storiesOfUser.author.profilePicture)} alt="" />
+          <img className="" src={fileUrl(storiesOfUser.author.profilePicture)} alt="" referrerPolicy="no-referrer" />
         </div>
       ))}
       <Modal

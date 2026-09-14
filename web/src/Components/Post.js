@@ -58,7 +58,7 @@ function Post({id,authorId,author,content,ImgPost,likes,comments,date}){
         <>
             <div className="Post">
                 <div className="user" onClick={() => {if(authorId) navigate(`/profile/${authorId}`)}}>
-                    <img  src={author?.profilePicture}className="userimg" alt="Immagine utente" />
+                    <img src={author?.profilePicture} className="userimg" alt="Immagine utente" referrerPolicy="no-referrer" />
                     <p className="username">{author?.username}</p>
                     {String(authorId) == user.id ? 
                     <div className="owner-actions" onClick={(e) => e.stopPropagation()}>

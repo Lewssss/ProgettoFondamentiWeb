@@ -1,6 +1,7 @@
 import React from "react";
 import "./Chat.css";
 import { useChat } from "../Components/Chat";
+import { fileUrl } from "../api/config";
 
 function Chat({ onSelectChat }) {
   const { chats, loading, user } = useChat();
@@ -40,7 +41,12 @@ function Chat({ onSelectChat }) {
             className="chat-item"
             onClick={() => onSelectChat(chat)}
           >
-            <img className="chat-avatar" src={profilePicture} alt="" />
+            <img
+              className="chat-avatar"
+              src={fileUrl(profilePicture)}
+              alt=""
+              referrerPolicy="no-referrer"
+            />
             <div className="chat-info">
               <div className="chat-name">
                 {participantNames || "Utente"}
