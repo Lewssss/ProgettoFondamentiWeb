@@ -1,4 +1,4 @@
-import Story from '../Models/Story.js';
+import Story from '../models/Story.js';
 import User from '../models/Users.js';
 import mongoose from 'mongoose';
 import fs from 'fs';
