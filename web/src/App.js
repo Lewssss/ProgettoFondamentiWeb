@@ -6,7 +6,6 @@ import Register from "./Pages/Register"; // importa Register
 import Login from "./Pages/Login"; // importa Login
 import OAuthCallback from "./Pages/OAuthCallback";
 import Dashboard from "./Pages/Dashboard"; //importa Dashboard
-import Navbar from "./Components/Navbar"; //import Navbar
 import ThemeSwitch from "./Components/ThemeSwitch";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // importa Router
 import { userContext } from "./Context/UserContext";

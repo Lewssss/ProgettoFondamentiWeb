@@ -20,7 +20,7 @@ function Register() {
                 navigate("/login");
             }, 2000);
         } catch (error) {
-            console.error(err);
+            console.error(error);
         }
     };
 
