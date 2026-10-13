@@ -20,7 +20,7 @@ export function useChat() {
       setLoading(true);
 
       try {
-        const rows = await getUserChats();
+        const rows = await getUserChats(); // prendi la funzione dall'endpoint
         setChats(rows || []);
       } catch (error) {
         console.error("Errore caricamento chat:", error);

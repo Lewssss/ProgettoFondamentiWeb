@@ -1,7 +1,7 @@
 import React from "react";
 import "./Chat.css";
 import { useChat } from "../Components/Chat";
-import { fileUrl } from "../api/config";
+import { fileUrl } from "../api/config"; // per convertire l'immagine dell'utente
 
 function Chat({ onSelectChat }) {
   const { chats, loading, user } = useChat();
@@ -31,8 +31,8 @@ function Chat({ onSelectChat }) {
         );
         const participantNames = otherParticipants
           .map((participant) => participant.username)
-          .filter(Boolean)
-          .join(", ");
+          .filter(Boolean) //per rimuovere eventuali nomi invalidi
+          .join(", "); // se ci sono più nomi li separa con una virgola
         const profilePicture = otherParticipants[0]?.profilePicture;
 
         return (

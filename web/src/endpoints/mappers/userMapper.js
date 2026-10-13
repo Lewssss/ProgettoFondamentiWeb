@@ -30,13 +30,14 @@ export function mapPost(raw) {
   return raw.data.map((post) => ({
     id: post._id,
     authorId: post.author?._id ?? post.author ?? null,
-    author: (post.author && post.author.username)
-    ? {
-        id: String(post.author._id),
-        username: post.author.username,
-        profilePicture: fileUrl(post.author.profilePicture ?? null),
-      }
-    : null,
+    author:
+      post.author && post.author.username
+        ? {
+            id: String(post.author._id),
+            username: post.author.username,
+            profilePicture: fileUrl(post.author.profilePicture ?? null),
+          }
+        : null,
     content: post.content,
     ImgPost: fileUrl(post.image),
     likes: post.likes ?? [],
@@ -57,6 +58,7 @@ export function mapComment(raw) {
 }
 
 export function mapChat(raw) {
+  //Funzione per rendere i dati grezzi backend in dati semplici per frontend
   if (!raw) throw new Error("payload mancante");
   return raw.data.map((chat) => ({
     id: chat._id,

@@ -51,10 +51,11 @@ export function useDirect({ chatId, userId }) {
     if (!chatId || !userId) return;
 
     const socket = createChatSocket();
-    socketRef.current = socket;
+    socketRef.current = socket; //contiene la connessione creata
 
-    socket.emit("join_chat", chatId);
+    socket.emit("join_chat", chatId); //creo l'evento joinchat e lo identifico con l'id
 
+    //on per rimanere in ascolto message:new evento
     socket.on("message:new", (message) => {
       setMessages((currentMessages) => [
         ...currentMessages,
@@ -75,7 +76,7 @@ export function useDirect({ chatId, userId }) {
   }, [chatId, userId]);
 
   const sendMessage = async () => {
-    const text = input.trim();
+    const text = input.trim(); //rimove spazi
 
     if (!text || !chatId) return;
 

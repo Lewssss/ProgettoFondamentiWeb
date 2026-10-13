@@ -39,7 +39,7 @@ export async function getPostComments(postId) {
 export async function getUserChats(userId) {
   // testare se fuinziona
   const { data } = await api.get("/chats/getChats/");
-  return mapChat(data);
+  return mapChat(data); //mapChat funzione del mapper
 }
 
 export async function createChat(targetUserId) {

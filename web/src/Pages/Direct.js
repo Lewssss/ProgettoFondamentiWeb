@@ -33,7 +33,7 @@ const Direct = ({ name, onBack, chatId, userId }) => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); //il comportamento pred del browser in questo caso ricaricamento pagina per via del form
     await sendMessage();
   };
 

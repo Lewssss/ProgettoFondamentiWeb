@@ -18,7 +18,8 @@ export function UserContextProvider({ children }) {
         })
         .catch((err) => {
           const status = err?.response?.status;
-          if (status === 401 || status === 403) { //altrimenti fa clear anche per errori inutili
+          if (status === 401 || status === 403) {
+            //altrimenti fa clear anche per errori inutili
             clearAuthStorage();
           }
           setReady(true);
@@ -29,8 +30,9 @@ export function UserContextProvider({ children }) {
   }, []);
 
   return (
+    //il provider rende disponibili i valori
     <userContext.Provider value={{ user, setUser, ready }}>
-      {children}
+      {children} {/*i figli del provider avranno accesso al contesto*/}
     </userContext.Provider>
   );
 }

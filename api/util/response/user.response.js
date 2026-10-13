@@ -1,7 +1,7 @@
 export const responseWithData = (data) => {
   //Verificare se utile
   let response = { success: true };
-  response.skipMessage = true;
+  response.skipMessage = true; //non c'è bisogno che lo mostri
   response.data = data;
   return response;
 };
@@ -13,7 +13,6 @@ export const responseWithDataAndMessage = (data, message) => {
   response.data = data;
   return response;
 };
-
 
 export const Fail = () => {
   //Verificare se utile

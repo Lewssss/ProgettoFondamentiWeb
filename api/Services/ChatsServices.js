@@ -24,7 +24,7 @@ async function newChat(userId, targetUserId) {
 
     let chat = await Chat.findOne({
       participants: {
-        $all: [userId, targetUserId],
+        $all: [userId, targetUserId], //Deve contenerli entrambi = %all (appartiene m amongo)
       },
     });
 
@@ -34,13 +34,13 @@ async function newChat(userId, targetUserId) {
       });
     } else {
       await Chat.findByIdAndUpdate(chat._id, {
-        $pull: { hiddenFor: userId },
+        $pull: { hiddenFor: userId }, //Questo lo eleimina (stesso discorso di prima)
       });
     }
 
     chat = await Chat.findById(chat._id)
       .populate("participants", "username profilePicture")
-      .lean();
+      .lean(); //Cosi ti assicuri che siano oggetti normali di js
 
     return [200, response.responseWithData(chat)];
   } catch (error) {
@@ -53,7 +53,7 @@ async function getChats(userId) {
   try {
     const chats = await Chat.find({
       participants: userId,
-      hiddenFor: { $ne: userId },
+      hiddenFor: { $ne: userId }, //diverso da = %ne
     })
       .populate("participants", "username profilePicture")
       .lean();

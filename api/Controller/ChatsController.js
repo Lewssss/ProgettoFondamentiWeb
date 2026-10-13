@@ -10,7 +10,7 @@ router.post("/clearChat", authenticateToken, clearChat);
 
 async function newChat(req, res, next) {
   try {
-    const { targetUserId } = req.body;
+    const { targetUserId } = req.body; //Equivalenrte di const targetecc = req.body.targetecc
 
     const result = await ChatsServices.newChat(req.user.userId, targetUserId);
 
