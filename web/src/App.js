@@ -10,6 +10,7 @@ import ThemeSwitch from "./Components/ThemeSwitch";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // importa Router
 import { userContext } from "./Context/UserContext";
 import { Outlet, Navigate } from "react-router-dom";
+import Home from "./Pages/Home";
 
 const MainLayout = () => (
   <>
@@ -39,12 +40,7 @@ function App() {
     <Router>
       <ThemeSwitch />
       <Routes>
-        <Route
-          path="/"
-          element={
-            user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route
           path="/register"
           element={user ? <Navigate to="/dashboard" /> : <Register />}
