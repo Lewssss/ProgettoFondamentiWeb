@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // im
 import { userContext } from "./Context/UserContext";
 import { Outlet, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
+import ArtWorkDetail from "./Pages/ArtWorkDetail";
 
 const MainLayout = () => (
   <>
@@ -41,6 +42,7 @@ function App() {
       <ThemeSwitch />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/artworks/:id" element={<ArtWorkDetail />} />
         <Route
           path="/register"
           element={user ? <Navigate to="/dashboard" /> : <Register />}

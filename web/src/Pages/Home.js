@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   ArrowDown,
@@ -11,40 +12,30 @@ import {
 } from "lucide-react";
 import "./Home.css";
 
-const artworks = [
-  {
-    id: 1,
-    title: "La luce del silenzio",
-    artist: "Elena Moretti",
-    year: "2023",
-    price: 1250,
-    category: "Pittura contemporanea",
-    image:
-      "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 2,
-    title: "Forme in movimento",
-    artist: "Luca Ferri",
-    year: "2024",
-    price: 980,
-    category: "Arte astratta",
-    image:
-      "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 3,
-    title: "Oltre l'orizzonte",
-    artist: "Sofia Ricci",
-    year: "2022",
-    price: 1750,
-    category: "Arte moderna",
-    image:
-      "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=900&q=85",
-  },
-];
-
 function Home() {
+  const [artWorks, setArtWorks] = useState([]);
+  const [loadingArtWorks, setLoadingArtWorks] = useState(true);
+  const [artWorksError, setArtWorksError] = useState("");
+
+  useEffect(() => {
+    const fetchArtWorks = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/artworks");
+
+        setArtWorks(response.data);
+      } catch (error) {
+        console.error("Errore nel caricamento delle opere:", error);
+        setArtWorksError(
+          "Non è stato possibile caricare le opere. Riprova più tardi.",
+        );
+      } finally {
+        setLoadingArtWorks(false);
+      }
+    };
+
+    fetchArtWorks();
+  }, []);
+
   return (
     <main className="museum-home">
       <header className="museum-header">
@@ -175,30 +166,44 @@ function Home() {
           </button>
         </div>
 
-        <div className="artwork-grid">
-          {artworks.map((artwork) => (
-            <article className="artwork-card" key={artwork.id}>
-              <div className="artwork-image">
-                <img src={artwork.image} alt={artwork.title} />
-                <span className="artwork-category">{artwork.category}</span>
-              </div>
-
-              <div className="artwork-details">
-                <div>
-                  <h3>{artwork.title}</h3>
-                  <p>
-                    {artwork.artist} · {artwork.year}
-                  </p>
+        {loadingArtWorks ? (
+          <p role="status">Caricamento delle opere...</p>
+        ) : artWorksError ? (
+          <p role="alert">{artWorksError}</p>
+        ) : artWorks.length === 0 ? (
+          <p>Nessuna opera disponibile al momento.</p>
+        ) : (
+          <div className="artwork-grid">
+            {artWorks.map((artWork) => (
+              <article className="artwork-card" key={artWork._id}>
+                <div className="artwork-image">
+                  <img src={artWork.image} alt={artWork.title} loading="lazy" />
+                  <span className="artwork-category">{artWork.category}</span>
                 </div>
 
-                <div className="artwork-price">
-                  <span>Prezzo indicativo</span>
-                  <strong>{artwork.price.toLocaleString("it-IT")} €</strong>
+                <div className="artwork-details">
+                  <div>
+                    <h3>{artWork.title}</h3>
+                    <p>
+                      {artWork.artist} · {artWork.year}
+                    </p>
+                  </div>
+
+                  <div className="artwork-price">
+                    <span>Prezzo indicativo</span>
+                    <strong>{artWork.price.toLocaleString("it-IT")} €</strong>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+                <Link
+                  to={`/artworks/${artWork._id}`}
+                  className="artwork-card-link"
+                >
+                  Scopri l'opera →
+                </Link>
+              </article>
+            ))}
+          </div>
+        )}
 
         <p className="museum-disclaimer" id="catalogo-preview">
           Opere e prezzi sono dimostrativi. Il catalogo sarà collegato a MongoDB
