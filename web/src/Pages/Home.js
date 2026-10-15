@@ -50,6 +50,7 @@ function Home() {
         </Link>
 
         <nav className="museum-nav">
+          <Link to="/my-purchases">I miei acquisti</Link>
           <a href="#collezione">Collezione</a>
           <a href="#esperienza">Il museo</a>
           <a href="#aste">Aste</a>

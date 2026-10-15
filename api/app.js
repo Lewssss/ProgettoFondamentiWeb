@@ -15,6 +15,7 @@ import cors from "cors";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 import ArtWorkController from "./Controller/ArtWorkController.js";
+import PurchaseController from "./Controller/PurchaseController.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -47,6 +48,7 @@ app.use("/user", UserController);
 app.use("/post", PostController);
 app.use("/stories", StoriesController);
 app.use("/api/artworks", ArtWorkController); //mi sa che qui api non ci serve, controllarte
+app.use("/api/purchases", PurchaseController);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/", (req, res) => {

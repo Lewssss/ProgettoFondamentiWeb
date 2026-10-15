@@ -9,6 +9,7 @@ function ArtWorkDetail() {
   const [ArtWork, setArtWork] = useState(null);
   const [LoadingArtWork, setLoadingArtWork] = useState(true);
   const [ArtWorkError, setArtWorkError] = useState("");
+  const [PurchaseMessage, setPurchaseMessage] = useState("");
 
   useEffect(() => {
     const FetchArtWork = async () => {
@@ -36,6 +37,28 @@ function ArtWorkDetail() {
 
     FetchArtWork();
   }, [id]);
+
+  const HandlePurchase = async () => {
+    try {
+      setPurchaseMessage("");
+
+      const Response = await axios.post(
+        `http://localhost:5000/api/purchases/${ArtWork._id}`,
+      );
+
+      setArtWork((CurrentArtWork) => ({
+        ...CurrentArtWork,
+        available: false,
+      }));
+
+      setPurchaseMessage(Response.data.message);
+    } catch (Error) {
+      setPurchaseMessage(
+        Error.response?.data?.message ||
+          "Non è stato possibile completare l'acquisto.",
+      );
+    }
+  };
 
   if (LoadingArtWork) {
     return <main className="artwork-detail-message">Caricamento opera...</main>;
@@ -95,12 +118,16 @@ function ArtWorkDetail() {
           <button
             type="button"
             disabled={!ArtWork.available}
-            onClick={() => {
-              alert("Acquisto simulato: funzionalità in arrivo!");
-            }}
+            onClick={HandlePurchase}
           >
             {ArtWork.available ? "Acquista opera" : "Non disponibile"}
           </button>
+
+          {PurchaseMessage && (
+            <p role="status" aria-live="polite">
+              {PurchaseMessage}
+            </p>
+          )}
         </div>
       </section>
     </main>

@@ -1,0 +1,141 @@
+
+.my-purchases-page {
+  min-height: 100vh;
+  padding: 110px 7% 70px;
+  background: #101014;
+  color: #f5f3f8;
+}
+
+.my-purchases-header {
+  max-width: 1000px;
+  margin: 0 auto 42px;
+}
+
+.my-purchases-back {
+  display: inline-block;
+  margin-bottom: 34px;
+  color: #c2a5ff;
+  text-decoration: none;
+}
+
+.my-purchases-eyebrow {
+  color: #b69af5;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+}
+
+.my-purchases-header h1 {
+  margin: 12px 0;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+}
+
+.my-purchases-header > p:last-child {
+  color: #bdb7c8;
+}
+
+.my-purchases-count,
+.my-purchases-list,
+.my-purchases-empty {
+  max-width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.my-purchases-count {
+  color: #bdb7c8;
+}
+
+.my-purchases-list {
+  display: grid;
+  gap: 16px;
+}
+
+.my-purchase-card {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 22px;
+  padding: 20px;
+  border: 1px solid #302b3a;
+  border-radius: 16px;
+  background: #19171f;
+}
+
+.my-purchase-artwork {
+  display: grid;
+  width: 90px;
+  height: 100px;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #40305f, #9b72f2);
+  font-family: Georgia, serif;
+  font-size: 1.6rem;
+}
+
+.my-purchase-info h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.my-purchase-info p {
+  margin: 5px 0;
+  color: #bdb7c8;
+  font-size: 0.92rem;
+}
+
+.my-purchase-summary {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.my-purchase-summary strong {
+  font-size: 1.15rem;
+}
+
+.my-purchase-status {
+  color: #c2a5ff;
+  font-size: 0.8rem;
+}
+
+.my-purchases-empty {
+  padding: 40px;
+  border: 1px solid #302b3a;
+  border-radius: 16px;
+  background: #19171f;
+}
+
+.my-purchases-empty p {
+  color: #bdb7c8;
+}
+
+.my-purchases-empty a {
+  color: #c2a5ff;
+}
+
+.my-purchases-error {
+  color: #ffaaaa;
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  .my-purchases-page {
+    padding: 95px 5% 40px;
+  }
+
+  .my-purchase-card {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .my-purchase-artwork {
+    width: 64px;
+    height: 76px;
+  }
+
+  .my-purchase-summary {
+    grid-column: 2;
+    justify-items: start;
+  }
+}

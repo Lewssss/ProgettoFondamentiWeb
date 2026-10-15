@@ -1,6 +1,6 @@
 import { Router } from "express";
 import mongoose from "mongoose";
-import ArtWorkService from "../Services/ArtWorkServices.js";
+import ArtWorkService from "../Services/ArtWorkService.js";
 
 const ArtWorkController = Router();
 

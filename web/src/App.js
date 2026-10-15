@@ -12,6 +12,7 @@ import { userContext } from "./Context/UserContext";
 import { Outlet, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import ArtWorkDetail from "./Pages/ArtWorkDetail";
+import MyPurchases from "./Pages/MyPurchases";
 
 const MainLayout = () => (
   <>
@@ -43,6 +44,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/artworks/:id" element={<ArtWorkDetail />} />
+        <Route path="/my-purchases" element={<MyPurchases />} />
         <Route
           path="/register"
           element={user ? <Navigate to="/dashboard" /> : <Register />}
